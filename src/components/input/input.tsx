@@ -55,6 +55,7 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
 
     const handleSubmit = async ({ customValue }: { customValue: string }) => {
       if (!customValue.trim()) return;
+      if (isFetching) return;
 
       try {
         setIsFetching(true);
