@@ -44,6 +44,7 @@ pnpm install
 # Configuration des variables d'environnement
 .env.exemple.development
 # Éditer .env avec vos propres variables et renommer en .env.development
+variable a modifier: NEXT_PUBLIC_MISTRAL_API_KEY
 
 # Lancer l'application
 pnpm dev
