@@ -29,7 +29,7 @@ Portfolio Chatbot Assistant est un agent conversationnel intelligent conçu pour
 
 ## Technologies utilisées
 
-- NextJs avec TypeScript, Zustand, Zod, Axios, Lottie-React, Lucide-React, TailwindCSS
+- NextJs avec TypeScript, Zustand, Zod, Axios, Lottie-React, Lucide-React, TailwindCSS, Storybook
 - NLP: Mistral Small
 
 ## Installation
