@@ -6,6 +6,9 @@ import { Input } from '@/components/input';
 export default function Home() {
   return (
     <div className="relative h-screen w-screen overflow-hidden">
+      <div className="absolute left-4 top-4 text-neutral-900 font-medium">
+        Quentin Truffy
+      </div>
       <Background />
       <div className="flex flex-row h-full w-full">
         <div className="flex flex-col gap-4 grow mx-auto max-w-2xl w-full">

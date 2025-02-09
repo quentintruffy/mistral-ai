@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mistral AI - Portfolio Chatbot Assistant
 
-## Getting Started
+## Description
 
-First, run the development server:
+Portfolio Chatbot Assistant est un agent conversationnel intelligent conçu pour servir de représentant numérique interactif de mon profil professionnel. Ce chatbot agit comme un portfolio dynamique, capable de répondre à toutes les questions concernant mon parcours, mes compétences et mes aspirations professionnelles.
+
+## Fonctionnalités principales
+
+### Interaction naturelle
+
+- Communication en langage naturel avec les recruteurs et visiteurs
+- Réponses personnalisées et contextuelles
+- Capacité à gérer des conversations complexes et multi-tours
+
+### Informations professionnelles
+
+- Présentation détaillée de mon parcours académique
+- Description de mes expériences professionnelles
+- Liste complète de mes compétences techniques
+- Présentation de mes projets significatifs
+- Information sur mes attentes salariales et conditions de travail souhaitées
+
+### Aspects techniques
+
+- Développé avec les dernières technologies de traitement du langage naturel
+- Architecture modulaire permettant une mise à jour facile des informations
+- Interface utilisateur intuitive et responsive
+- Logging des conversations pour analyse et amélioration continue
+
+## Technologies utilisées
+
+- NextJs avec TypeScript, Zustand, Zod, Axios, Lottie-React, Lucide-React, TailwindCSS
+- NLP: Mistral Small
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Cloner le repository
+git clone https://github.com/quentintruffy/mistral-ai
+
+# Installer les dépendances
+pnpm install
+
+# Configuration des variables d'environnement
+.env.exemple.development
+# Éditer .env avec vos propres variables
+
+# Lancer l'application
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure du projet
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+mistral-ai/
+├── src/
+│   ├── api/
+│   ├── app/
+│   ├── components/
+│   ├── schemas/
+│   ├── stores/
+│   └── utils/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contribution
 
-## Learn More
+Ce projet est développé dans le cadre d'une candidature pour Mistral AI. Les contributions externes ne sont pas acceptées pour le moment.
 
-To learn more about Next.js, take a look at the following resources:
+## Motivation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ce projet démontre ma capacité à:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Concevoir et implémenter des solutions d'IA conversationnelle
+- Créer des applications full-stack modernes et scalables
+- Travailler avec les dernières technologies de NLP
+- Comprendre et implémenter les bonnes pratiques de développement
 
-## Deploy on Vercel
+## Perspectives futures
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Intégration de capacités multilingues
+- Ajout d'une interface de visualisation de données
+- Amélioration continue des capacités conversationnelles
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+
+Pour toute question concernant ce projet ou ma candidature, n'hésitez pas à me contacter:
+
+- Email: pro.quentint@gmail.com
+- Phone (en français): +33 7 70 78 17 49
+- GitHub: @quentintruffy
+
+## Licence
+
+Ce projet est sous licence MIT.
