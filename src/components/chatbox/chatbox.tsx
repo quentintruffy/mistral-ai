@@ -48,6 +48,12 @@ const Chatbox = forwardRef<HTMLDivElement, UseChatboxProps>(
           className: classNames?.wrapper_chatbox,
         })}
       >
+        {messages.length > 1 ? null : (
+          <div className="flex items-center justify-center h-full text-neutral-800 font-medium">
+            Bonjour, je suis l'assistant virtuel de Quentin.
+          </div>
+        )}
+
         {messages
           .filter((r) => r.choices[0].message.role !== 'system')
           .map((message, index) => {
