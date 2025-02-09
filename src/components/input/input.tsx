@@ -5,7 +5,7 @@ import { MessageType } from '@/schemas/messages.schemas';
 import { useAIStore } from '@/stores/useAIStore';
 import { SlotsToClasses } from '@/utils';
 import { ArrowUp, ChevronUp } from 'lucide-react';
-import { AreaHTMLAttributes, forwardRef } from 'react';
+import { AreaHTMLAttributes, forwardRef, useMemo } from 'react';
 import { input } from '.';
 
 type InputProps = {
@@ -41,12 +41,20 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        handleSubmit();
+        handleSubmit({ customValue: inputValue });
       }
     };
 
-    const handleSubmit = async () => {
-      if (!inputValue.trim()) return;
+    const suggestedInputs = useMemo(() => {
+      return [
+        "Parle moi de Quentin, s'il te plaît.",
+        'Quand est-il disponible et que recherche-t-il ?',
+        'CV ?',
+      ];
+    }, []);
+
+    const handleSubmit = async ({ customValue }: { customValue: string }) => {
+      if (!customValue.trim()) return;
 
       try {
         setIsFetching(true);
@@ -64,7 +72,7 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
             {
               index: 0,
               message: {
-                content: inputValue,
+                content: customValue,
                 tool_calls: null,
                 prefix: false,
                 role: 'user',
@@ -89,47 +97,66 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
     };
 
     return (
-      <div
-        className={wrapper_animation({
-          className: classNames?.wrapper_animation,
-          isFetching,
-        })}
-      >
+      <div className="flex flex-col space-y-1 h-fit w-full">
+        <div className="flex flex-row space-x-1">
+          {suggestedInputs.map((input, index) => (
+            <button
+              key={index}
+              onClick={() =>
+                handleSubmit({
+                  customValue: input,
+                })
+              }
+              className="inline-flex items-center gap-2 cursor-pointer duration-150 text-sm bg-neutral-100 hover:bg-neutral-200 px-3 py-1.5 rounded-xl border border-neutral-200"
+            >
+              {input}
+            </button>
+          ))}
+        </div>
         <div
-          className={wrapper_input({ className: classNames?.wrapper_input })}
+          className={wrapper_animation({
+            className: classNames?.wrapper_animation,
+            isFetching,
+          })}
         >
           <div
-            className={wrapper_actions({
-              className: classNames?.wrapper_actions,
-            })}
+            className={wrapper_input({ className: classNames?.wrapper_input })}
           >
-            <textarea
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Que souhaitez-vous savoir ?"
-              onKeyDown={handleKeyDown}
-              rows={1}
-              className={action_textarea({
-                className: classNames?.action_textarea,
-              })}
-            />
-            <button
-              onClick={handleSubmit}
-              className={action_button({
-                className: classNames?.action_button,
+            <div
+              className={wrapper_actions({
+                className: classNames?.wrapper_actions,
               })}
             >
-              <ArrowUp size={20} className="stroke-neutral-800" />
-            </button>
-          </div>
-          <div
-            className={wrapper_edits({ className: classNames?.wrapper_edits })}
-          >
-            <button
-              className={edit_button({ className: classNames?.edit_button })}
+              <textarea
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Que souhaitez-vous savoir ?"
+                onKeyDown={handleKeyDown}
+                rows={1}
+                className={action_textarea({
+                  className: classNames?.action_textarea,
+                })}
+              />
+              <button
+                onClick={() => handleSubmit({ customValue: inputValue })}
+                className={action_button({
+                  className: classNames?.action_button,
+                })}
+              >
+                <ArrowUp size={20} className="stroke-neutral-800" />
+              </button>
+            </div>
+            <div
+              className={wrapper_edits({
+                className: classNames?.wrapper_edits,
+              })}
             >
-              Mistral Small <ChevronUp size={14} />
-            </button>
+              <button
+                className={edit_button({ className: classNames?.edit_button })}
+              >
+                Mistral Small <ChevronUp size={14} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

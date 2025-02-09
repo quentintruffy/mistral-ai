@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 const chatbox = tv({
   slots: {
     wrapper_chatbox:
-      'flex flex-col space-y-4 overflow-y-auto no-scrollbar h-full w-full',
+      'flex flex-col space-y-4 overflow-y-auto no-scrollbar h-full w-full pt-8',
     wrapper_messages: 'w-full h-fit',
     row_message: 'flex w-full',
     wrapper_content: 'flex flex-col space-y-1',

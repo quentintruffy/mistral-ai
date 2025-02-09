@@ -7,6 +7,13 @@ interface CodeBlock {
   end: number;
 }
 
+interface Command {
+  type: string;
+  value: string;
+  start: number;
+  end: number;
+}
+
 interface TypingAnimationProps {
   message: string;
   speed?: number;
@@ -25,15 +32,31 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
   const [displayedText, setDisplayedText] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[]>([]);
+  const [commands, setCommands] = useState<Command[]>([]);
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const { setIsFetching } = useAIStore();
 
-  // Fonction pour traiter le message complet
+  const extractCommands = (text: string): Command[] => {
+    const cmdRegex = /\[cmd:(.*?)\]/g;
+    const commands: Command[] = [];
+    let match;
+
+    while ((match = cmdRegex.exec(text)) !== null) {
+      commands.push({
+        type: match[1].split(':')[0],
+        value: match[1].split(':')[1],
+        start: match.index,
+        end: match.index + match[0].length,
+      });
+    }
+
+    return commands;
+  };
+
   const processFullMessage = (text: string): string => {
     const blocks = extractCodeBlocks(text);
     let processedText = text;
 
-    // Remplacer tous les blocs de code d'un coup
     blocks.reverse().forEach((block) => {
       const before = processedText.slice(0, block.start);
       const after = processedText.slice(block.end);
@@ -43,7 +66,13 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
         after;
     });
 
-    return processedText;
+    const cmds = extractCommands(processedText);
+    cmds.reverse().forEach((cmd) => {
+      processedText =
+        processedText.slice(0, cmd.start) + processedText.slice(cmd.end);
+    });
+
+    return processedText.replace(/\n$/, '');
   };
 
   const extractCodeBlocks = (text: string): CodeBlock[] => {
@@ -82,10 +111,10 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
       setCurrentIndex(message.length);
       setIsComplete(true);
     } else {
-      // Sinon, réinitialiser pour l'animation
       setDisplayedText('');
       setCurrentIndex(0);
       setCodeBlocks(extractCodeBlocks(message));
+      setCommands(extractCommands(message));
     }
   }, [message, role]);
 
@@ -94,21 +123,28 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
 
     if (currentIndex < message.length) {
       const timer = setTimeout(() => {
+        const command = commands.find(
+          (cmd) =>
+            cmd.start === currentIndex ||
+            (currentIndex > cmd.start && currentIndex < cmd.end),
+        );
+
         const codeBlock = codeBlocks.find(
           (block) =>
             block.start === currentIndex ||
             (currentIndex > block.start && currentIndex < block.end),
         );
 
-        if (codeBlock && currentIndex === codeBlock.start) {
-          // Remplacer le bloc de code par un div personnalisé
+        if (command && currentIndex === command.start) {
+          setCurrentIndex(command.end);
+        } else if (codeBlock && currentIndex === codeBlock.start) {
           setDisplayedText(
             (prev) =>
               prev +
-              '<button class="cursor-pointer bg-neutral-100 border border-neutral-200 rounded-xl p-2 h-fit w-fit">test</button>',
+              '\n<button class="cursor-pointer bg-neutral-100 border border-neutral-200 rounded-xl p-2 h-fit w-fit">test</button>\n',
           );
           setCurrentIndex(codeBlock.end);
-        } else if (!codeBlock) {
+        } else if (!command && !codeBlock) {
           setDisplayedText((prev) => prev + message[currentIndex]);
           setCurrentIndex((prev) => prev + 1);
         }
@@ -116,11 +152,10 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
 
       return () => clearTimeout(timer);
     } else if (!isComplete) {
-      // Animation terminée
       setIsComplete(true);
       setIsFetching(false);
     }
-  }, [currentIndex, message, speed, codeBlocks]);
+  }, [currentIndex, message, speed, codeBlocks, commands, role, isComplete]);
 
   return (
     <div

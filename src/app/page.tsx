@@ -1,4 +1,5 @@
 import { Background } from '@/components/background';
+import { Canvas } from '@/components/canvas';
 import { Chatbox } from '@/components/chatbox';
 import { Input } from '@/components/input';
 
@@ -20,7 +21,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* <div className="flex w-96 bg-yellow-300">d</div> */}
+        <Canvas />
       </div>
     </div>
   );
