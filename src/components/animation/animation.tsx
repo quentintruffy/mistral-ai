@@ -166,5 +166,6 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
     />
   );
 };
+
 export { TypingAnimation };
 export type { MessageProps, TypingAnimationProps };

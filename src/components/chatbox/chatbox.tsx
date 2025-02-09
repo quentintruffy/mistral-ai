@@ -5,7 +5,7 @@ import { SlotsToClasses } from '@/utils';
 import { SquareTerminal } from 'lucide-react';
 import { forwardRef, HTMLAttributes, useEffect, useRef } from 'react';
 import { chatbox } from '.';
-import { TypingAnimation } from '../animation/animation';
+import { TypingAnimation } from '../animation';
 
 type ChatboxProps = {
   classNames?: SlotsToClasses<keyof typeof chatbox.slots>;
