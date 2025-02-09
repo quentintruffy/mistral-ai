@@ -6,8 +6,9 @@ const input = tv({
       'h-fit w-full bg-neutral-200 p-0.5 rounded-[18px] shadow',
     wrapper_input:
       'bg-white flex flex-col space-y-0.5 h-full w-full rounded-2xl overflow-hidden bg-white p-2.5',
-    wrapper_actions: 'flex flex-row items-center justify-between gap-2.5',
-    action_textarea: 'w-full h-full px-1.5 resize-none outline-none',
+    wrapper_actions: 'flex flex-row items-center justify-between gap-2.5 h-fit',
+    action_textarea:
+      'w-full h-full px-1.5  outline-none decoration-0 max-h-[200px] min-h-[24px] [&]:h-auto resize-none block box-border overflow-y-auto overflow-hidden transition-height',
     action_button:
       'inline-flex items-center justify-center cursor-pointer bg-[#D7CEEF] h-8 w-8 aspect-square rounded-[6px]',
     wrapper_edits: '',

@@ -93,6 +93,13 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
       }
     };
 
+    const adjustTextareaHeight = (element) => {
+      // Reset la hauteur à auto pour bien recalculer
+      element.style.height = 'auto';
+      // Applique la nouvelle hauteur basée sur le contenu
+      element.style.height = element.scrollHeight + 'px';
+    };
+
     return (
       <div className="flex flex-col space-y-1 h-fit w-full">
         <div className="flex flex-row space-x-1">
@@ -126,9 +133,18 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
             >
               <textarea
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  adjustTextareaHeight(e.target);
+                }}
                 placeholder="Que souhaitez-vous savoir ?"
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e) => {
+                  handleKeyDown(e);
+                  // Réajuste aussi lors de la suppression avec Backspace ou Delete
+                  if (e.key === 'Backspace' || e.key === 'Delete') {
+                    adjustTextareaHeight(e.target);
+                  }
+                }}
                 rows={1}
                 className={action_textarea({
                   className: classNames?.action_textarea,
