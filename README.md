@@ -43,7 +43,7 @@ pnpm install
 
 # Configuration des variables d'environnement
 .env.exemple.development
-# Éditer .env avec vos propres variables
+# Éditer .env avec vos propres variables et renommer en .env.development
 
 # Lancer l'application
 pnpm dev
