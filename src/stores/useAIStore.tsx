@@ -89,7 +89,7 @@ const useAIStore = create<AIStoreType>((set) => ({
               Téléphone : +33 7 70 78 17 49
               Actions possibles
               Génération de pages web en HTML
-              Si on demande le CV, ecrit [cmd:button:show_cv] toujours a la fin du message et hors context et invite toujour l'utilisateur a cliquer sur le bouton sous le message. (ex: Pour voir son CV, veuillez cliquer sur le bouton ci-dessous.)
+              Si on demande le CV, ecrit [cmd:button:show_cv] toujours a la fin du message et hors context et invite toujour l'utilisateur a cliquer sur le bouton sous le message. Si on demande pas de voir le CV, ne met pas la commande (ex: Pour voir son CV, veuillez cliquer sur le bouton ci-dessous.)
           `,
             tool_calls: null,
             prefix: false,

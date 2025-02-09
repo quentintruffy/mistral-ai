@@ -46,11 +46,7 @@ const Input = forwardRef<HTMLTextAreaElement, UseInputProps>(
     };
 
     const suggestedInputs = useMemo(() => {
-      return [
-        "Parle moi de Quentin, s'il te plaît.",
-        'Quand est-il disponible et que recherche-t-il ?',
-        'CV ?',
-      ];
+      return ["Parle moi de Quentin, s'il te plaît.", 'Que recherche-t-il ?'];
     }, []);
 
     const handleSubmit = async ({ customValue }: { customValue: string }) => {
