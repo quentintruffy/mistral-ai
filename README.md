@@ -42,9 +42,9 @@ git clone https://github.com/quentintruffy/mistral-ai
 pnpm install
 
 # Configuration des variables d'environnement
-.env.exemple.development
+NEXT_PUBLIC_MISTRAL_API_KEY
 # Éditer .env avec vos propres variables et renommer en .env.development
-variable a modifier: NEXT_PUBLIC_MISTRAL_API_KEY
+.env.exemple.development -> .env.development
 
 # Lancer l'application
 pnpm dev
