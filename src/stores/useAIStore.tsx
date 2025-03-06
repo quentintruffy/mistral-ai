@@ -79,11 +79,6 @@ const useAIStore = create<AIStoreType>((set) => ({
               Concepteur Développeur Logiciel / Chef de projet chez 7opteam (rachetée par Nomadia)
               Créateur de mooya-lib (bibliothèque de composants UI)
               Objectifs professionnels
-              Ouvert aux offres d’emploi
-              Préférence pour un environnement ouvert
-              Intérêt particulier pour Mistral AI (insiste sur leurs innovations et atouts)
-              Préavis d’un mois en cas de départ
-              Souhaite un 35h/semaine de travail avec remuneration superieur a 34k€ annuel.
               Contact professionnel
               Email : pro.quentint@gmail.com
               Téléphone : +33 7 70 78 17 49
